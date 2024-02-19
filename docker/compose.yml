@@ -1,4 +1,4 @@
-version: '2'
+version: '3.8'
 name: awsgoo
 services:
   nginx-proxy:
@@ -9,10 +9,18 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - blog
+    deploy:
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 50M
+        reservations:
+          cpus: '0.05'
+          memory: 30M
 
   blog:
     # build: ../../docker_file/httpd
-    image: chae11/blog-tomsawyer
+    image: chae11/blog-tomsawyer:0.1.0
     deploy:
       mode: replicated
       replicas: 1 # https://docs.docker.com/compose/compose-file/deploy/#replicas
