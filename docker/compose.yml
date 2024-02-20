@@ -27,7 +27,7 @@ services:
     expose:
       - "80"
     environment:
-      - VIRTUAL_HOST=aws.google.com
+      - VIRTUAL_HOST=aws.google.com, tom.google.com
       - VIRTUAL_PORT=80
 
 
@@ -40,5 +40,5 @@ services:
     expose:
       - "80"
     environment:
-      - VIRTUAL_HOST=google.aws.com
+      - VIRTUAL_HOST=google.aws.com, becky.google.com
       - VIRTUAL_PORT=80
