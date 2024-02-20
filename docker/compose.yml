@@ -8,7 +8,7 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
-      - blog
+      - blog_a
     deploy:
       resources:
         limits:
@@ -18,9 +18,9 @@ services:
           cpus: '0.05'
           memory: 30M
 
-  blog:
-    # build: ../../docker_file/httpd
-    image: chae11/blog-tomsawyer:0.1.0
+  blog_a:
+    build: blog-a/
+    #image: chae11/blog-tomsawyer:0.1.0
     deploy:
       mode: replicated
       replicas: 1 # https://docs.docker.com/compose/compose-file/deploy/#replicas
@@ -28,4 +28,17 @@ services:
       - "80"
     environment:
       - VIRTUAL_HOST=aws.google.com
+      - VIRTUAL_PORT=80
+
+
+  blog_b:
+    build: blog-b/
+    #image: chae11/blog-tomsawyer:0.1.0
+    deploy:
+      mode: replicated
+      replicas: 1 # https://docs.docker.com/compose/compose-file/deploy/#replicas
+    expose:
+      - "80"
+    environment:
+      - VIRTUAL_HOST=google.aws.com
       - VIRTUAL_PORT=80
